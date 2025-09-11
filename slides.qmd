@@ -1,0 +1,525 @@
+---
+title: "Secondary Traumatic Stress and Burnout"
+subtitle: "Golden Eagle Teacher Residency - Mentor Teacher Professional Development"
+author: "Hailee Hawkins, Program Coordinator"
+date: '`r Sys.Date()`'
+format:
+  revealjs:
+    css: styles.css
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+## Slide 1: What is Secondary Traumatic Stress (STS)? {.small}
+
+::: {.columns}
+
+::: {.column width="60%" style="font-size: 0.70em; line-height: 1.3;"}
+
+- STS mimics PTSD, resulting from indirect exposure to others' trauma [@figley1995compassion; @baird2006vicarious]  
+- Common in service professions:  
+  - Therapists  
+  - First responders  
+  - Teachers  
+- Symptoms include:  
+  - Intrusion  
+  - Avoidance  
+  - Arousal [@bride2004development]  
+- STS affects mental, physical and emotional health
+
+:::
+
+::: {.column width="40%" style="text-align:center;"}
+
+<img src="image3.png" alt="STS Concept Diagram" style="width:100%; margin-top: 0.5em;" />
+
+<div style="font-size: 0.7em; color: #666; margin-top: 0.3em;">
+  Source: www.collidu.com
+</div>
+
+:::
+
+:::
+
+
+## Slide 2: STS and Teachers
+
+::: {.columns style="display: flex; align-items: flex-start;"}
+
+::: {.column style="flex: 0 0 60%;"}
+
+- Teachers are exposed to trauma:  
+  - **Directly:** school violence, threats, student aggression  
+  - **Indirectly:** student trauma from abuse, poverty, neglect [@inabnett2023secondary]
+
+- High-needs / Title I schools → higher risk of STS 
+
+- Teacher well-being is linked to stress and school conditions [@kidger2016teachers]
+
+:::
+
+::: {.column style="flex: 0 0 40%; text-align: center;"}
+
+<img src="image4.jpg" alt="Teachers and STS" style="max-width: 100%; height: auto; margin-top: 0.5em;" />
+
+<div style="font-size: 0.7em; color: #666; margin-top: 0.3em;">
+  Source: www.themindsjournal.com
+</div>
+
+:::
+
+:::
+
+
+## Slide 3: STS, Burnout, and Attrition
+
+:::{.columns}
+::: {.column width="70%"}
+<div style="font-size: 0.8em;">
+
+- Chronic stress leads to burnout → emotional, mental, and physical toll [@baker2021experience]  
+- Burnout dimensions: emotional exhaustion, cynicism, inefficacy [@chang2009appraisal]  
+- Burnout types:  
+  - Personal  
+  - Work-related  
+  - Student-related [@de2017burnout]  
+- Burnout contributes to teacher attrition [@hilton2021predicting]  
+
+</div>
+:::
+
+::: {.column width="30%"}
+<img src="image7.png" alt="Teacher Burnout" style="max-width: 100%; height: auto; margin-top: 0.5em;" />
+
+<div style="font-size: 0.8em; color: #666; margin-top: 0.3em;">
+  Source: www.fairgaze.com
+</div>
+:::
+:::
+
+## Slide 4: STS Measurement & Relevance 
+
+:::{.columns}
+::: {.column width="55%"}
+<div style="font-size: 0.7em;">
+- STS measured by Secondary Traumatic Stress Scale (STSS):  
+  17 items across intrusion, avoidance, arousal subscales  
+
+- Mentors are uniquely positioned to recognize and respond to STS in residents — a key factor in early career persistence  
+
+- Taking the STSS helps build self-awareness around how stress may be affecting you personally  
+
+- Your reflection can inform how you support residents — and how you model healthy coping  
+
+</div>
+:::
+
+::: {.column width="45%"}
+<img src="image8.png" alt="Secondary Traumatic Stress Scale illustration" style="max-width: 90%; height: auto; margin-top: 0.5em;" />
+
+<div style="font-size: 0.7em; color: #666; margin-top: 0.3em;">
+  Source: [@bride2004development]
+</div>
+:::
+:::
+
+
+## Slide 5: STSS Self-Assessment
+
+### Secondary Traumatic Stress Scale (STSS)
+
+<div style="font-size: 0.60em; line-height: 1.2;">
+
+🧠 **Purpose:**  
+To reflect on your own experiences with stress and emotional impact related to supporting students who have experienced trauma.
+
+---
+
+### ✍️ Instructions:
+- Please complete the **17-item STSS** using your honest, personal responses.
+- Rate how frequently you've experienced each item **in the past week**, using the scale provided.
+- There are no right or wrong answers — this is **not a test** or evaluation.
+- You will **not be asked to share your score**. This is for your own reflection.
+
+---
+
+### 🛑 Before You Begin:
+- Take a breath. This may bring up emotions — that’s normal.
+- You are welcome to opt out at any time.
+
+⏱️ **You’ll have about 5–7 minutes to complete it.**
+
+</div>
+
+
+## Slide 6: STSS Self-Reflection
+
+### Interpreting Your STSS Score
+
+<div style="font-size: 0.7em;">
+
+🧠 **This is a personal tool for reflection, not evaluation.**  
+Your score is for *you* — to consider how stress may be showing up in your work.
+
+---
+
+### 💬 Reflection Prompts:
+
+- What stood out to you about your score?
+- Were any subscale areas (intrusion, avoidance, arousal) more elevated than others?
+- How might stress show up *differently* for your student teacher resident?
+- How do you typically respond when you're under significant stress at work?
+- What support would have helped *you* when you were new to teaching?
+
+---
+
+📝 *Take 2–3 minutes to jot down your thoughts before we continue.*
+
+</div>
+
+
+
+## Slide 7: Visualizing Risk
+
+### Attrition Probability and Total Score
+
+```{r, fig.align='center', fig.width=9.5, fig.height=5.5, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load your data
+sts_data <- read_csv("sts_data.csv")
+
+# Define prediction function
+pred_prob <- function(x, intercept, slope) {
+  log_odds <- intercept + slope * x
+  1 / (1 + exp(-log_odds))
+}
+
+# Model coefficients for STSS Total Score
+beta0_total <- -2.1175
+beta1_total <-  0.0317
+
+# Generate sequence and predictions for STSS Total Score
+stss_seq <- seq(min(sts_data$stss_total_score, na.rm = TRUE),
+                max(sts_data$stss_total_score, na.rm = TRUE), length.out = 100)
+
+df_total <- data.frame(
+  score = stss_seq,
+  probability = pred_prob(stss_seq, beta0_total, beta1_total),
+  model = "STSS Total Score"
+)
+
+# Define shaded zones for score ranges (0–85)
+zones <- data.frame(
+  xmin = c(0, 29, 57),
+  xmax = c(28, 56, 85),
+  fill = c("Low", "Medium", "High")
+)
+zones$fill <- factor(zones$fill, levels = c("Low", "Medium", "High"))
+
+# Plot STSS Total Score with shaded zones
+ggplot() +
+  # Background score range shading
+  geom_rect(data = zones, aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = 1, fill = fill),
+            alpha = 0.15, inherit.aes = FALSE) +
+  
+  # Predicted probability line
+  geom_line(data = df_total, aes(x = score, y = probability, color = model), linewidth = 1.2) +
+  
+  # Customize legend and theme
+  scale_fill_manual(values = c("Low" = "lightgreen", "Medium" = "khaki", "High" = "lightcoral")) +
+  labs(
+    x = "STSS Total Score",
+    y = "Predicted Probability of Attrition",
+    title = "Predicted Probability of Attrition by STSS Total Score",
+    color = NULL,
+    fill = "Score Range"
+  ) +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 14),
+    legend.position = "right"
+  )
+
+
+```
+<div style="font-size: 0.65em; margin-top: 1em;">
+
+- Total STSS reflects overall stress impact — e.g., resident expresses feeling overwhelmed or doubts their fit for the profession.
+
+</div>
+
+## Slide 8: Visualizing Risk
+
+### Attrition Probability and Intrusion Score
+
+```{r, fig.align='center', fig.width=9.5, fig.height=5.5, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+# Prediction function
+pred_prob <- function(x, intercept, slope) {
+  log_odds <- intercept + slope * x
+  1 / (1 + exp(-log_odds))
+}
+
+# Coefficients for Intrusion
+beta0_intrusion <- -2.1044
+beta1_intrusion <- 0.1091
+
+# Prediction data
+intrusion_seq <- seq(0, 25, length.out = 100)
+df_intrusion <- data.frame(
+  score = intrusion_seq,
+  probability = pred_prob(intrusion_seq, beta0_intrusion, beta1_intrusion)
+)
+
+# Shaded zones
+zones_intrusion <- data.frame(
+  xmin = c(0, 9, 18),
+  xmax = c(8, 17, 25),
+  fill = c("Low", "Medium", "High")
+)
+
+# Plot
+p_intrusion <- ggplot() +
+  geom_rect(data = zones_intrusion, aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = 1, fill = fill),
+            alpha = 0.15) +
+  geom_line(data = df_intrusion, aes(x = score, y = probability), color = "#1f77b4", linewidth = 1.2) +
+  scale_fill_manual(values = c("Low" = "lightgreen", "Medium" = "khaki", "High" = "lightcoral")) +
+  labs(
+    x = "Intrusion Score",
+    y = "Predicted Probability of Attrition",
+    title = "Attrition Risk by Intrusion Score",
+    fill = "Score Range"
+  ) +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+
+print(p_intrusion)
+
+
+```
+
+<div style="font-size: 0.65em; margin-top: 1em;">
+ 
+- Intrusion can present as re-living student trauma — e.g., resident repeatedly brings up distressing student stories and reports difficulty "shaking it off."
+
+</div>
+
+## Slide 9: Visualizing Risk
+
+### Attrition Probability and Avoidance Score
+
+```{r, fig.align='center', fig.width=9.5, fig.height=5.5, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+# Prediction function
+pred_prob <- function(x, intercept, slope) {
+  log_odds <- intercept + slope * x
+  1 / (1 + exp(-log_odds))
+}
+
+# Coefficients for Avoidance
+beta0_avoidance <- -1.96257
+beta1_avoidance <- 0.07041
+
+# Prediction data
+avoidance_seq <- seq(0, 35, length.out = 100)
+df_avoidance <- data.frame(
+  score = avoidance_seq,
+  probability = pred_prob(avoidance_seq, beta0_avoidance, beta1_avoidance)
+)
+
+# Shaded zones
+zones_avoidance <- data.frame(
+  xmin = c(0, 12, 24),
+  xmax = c(11, 23, 35),
+  fill = c("Low", "Medium", "High")
+)
+
+# Plot
+p_avoidance <- ggplot() +
+  geom_rect(data = zones_avoidance, aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = 1, fill = fill),
+            alpha = 0.15) +
+  geom_line(data = df_avoidance, aes(x = score, y = probability), color = "#ff7f0e", linewidth = 1.2) +
+  scale_fill_manual(values = c("Low" = "lightgreen", "Medium" = "khaki", "High" = "lightcoral")) +
+  labs(
+    x = "Avoidance Score",
+    y = "Predicted Probability of Attrition",
+    title = "Attrition Risk by Avoidance Score",
+    fill = "Score Range"
+  ) +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+
+print(p_avoidance)
+
+```
+
+<div style="font-size: 0.65em; margin-top: 1em;">
+
+- Avoidance may show up as emotional numbing or detachment — e.g., resident seems checked out or avoids classroom discussion of trauma or behavior incidents.
+
+</div>
+
+
+## Slide 10: Visualizing Risk
+
+### Attrition Probability and Arousal Score
+
+```{r, fig.align='center', fig.width=9.5, fig.height=5.5, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+# Prediction function
+pred_prob <- function(x, intercept, slope) {
+  log_odds <- intercept + slope * x
+  1 / (1 + exp(-log_odds))
+}
+
+# Coefficients for Arousal
+beta0_arousal <- -1.84259
+beta1_arousal <- 0.08196
+
+# Prediction data
+arousal_seq <- seq(0, 25, length.out = 100)
+df_arousal <- data.frame(
+  score = arousal_seq,
+  probability = pred_prob(arousal_seq, beta0_arousal, beta1_arousal)
+)
+
+# Shaded zones
+zones_arousal <- data.frame(
+  xmin = c(0, 9, 18),
+  xmax = c(8, 17, 25),
+  fill = c("Low", "Medium", "High")
+)
+
+# Plot
+p_arousal <- ggplot() +
+  geom_rect(data = zones_arousal, aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = 1, fill = fill),
+            alpha = 0.15) +
+  geom_line(data = df_arousal, aes(x = score, y = probability), color = "#2ca02c", linewidth = 1.2) +
+  scale_fill_manual(values = c("Low" = "lightgreen", "Medium" = "khaki", "High" = "lightcoral")) +
+  labs(
+    x = "Arousal Score",
+    y = "Predicted Probability of Attrition",
+    title = "Attrition Risk by Arousal Score",
+    fill = "Score Range"
+  ) +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+
+print(p_arousal)
+
+```
+
+<div style="font-size: 0.65em; margin-top: 1em;">
+  
+- Arousal may present as hypervigilance or irritability — e.g., resident is easily startled, irritable, or reports trouble sleeping or focusing.
+
+</div>
+
+## Slide 11: Implications for Mentors
+
+### What This Means for You as a Mentor
+
+- Some residents may be showing signs of STS without realizing it.  
+- Higher stress doesn’t just affect well-being — it predicts intent to leave.  
+- Early recognition and open, nonjudgmental conversations can be protective.  
+- You’re in a key position to model and support stress management strategies.
+
+## Slide 12: Gallery Walk Instructions
+
+### How to Participate
+
+<ul style="font-size: 0.8em; padding-left: 1.2rem;">
+  <li>Form a group of 2–3 people to move through the stations with.</li>
+  <li>Rotate through the stations around the room; each has a different question.</li>
+  <li>Spend about 2.5 to 3 minutes at each station reflecting and writing your group’s thoughts.</li>
+  <li>Write your responses on the sticky notes and place them on the chart paper.</li>
+  <li>Think about how the questions relate to your role as a mentor.</li>
+  <li>Keep an eye on the time to ensure everyone visits all stations.</li>
+  <li>After the rotations, be ready to share 1–2 key insights or strategies from your group during the full-group discussion.</li>
+</ul>
+
+## Slide 13: 🗣️ Debrief - What Did You Notice?
+
+### Group Share-Out Instructions
+
+<div style="font-size: 0.8em; line-height: 1.4; padding-top: 0.5em;">
+
+🔁 <b>Each group, please share 1–2 highlights</b> from a station where you left a response.  
+<ul>
+  <li>What resonated most with your group?</li>
+  <li>Was there a question that sparked deeper reflection or surprising insights?</li>
+</ul>
+
+---
+
+💬 <b>As you listen to others share:</b>  
+<ul>
+  <li>Notice patterns, common concerns, or powerful language</li>
+  <li>Think about how these ideas connect to your own mentoring practice</li>
+</ul>
+
+</div>
+
+
+## Slide 14: Key Takeways for Mentors
+
+### Practical, Actionable Strategies
+
+<div style="display: flex; justify-content: space-between; gap: 1.5rem; font-size: 0.62em; overflow-wrap: break-word;">
+
+<!-- LEFT COLUMN -->
+<div style="flex: 0 0 45%;">
+<h4>What to Watch For</h4>
+<ul style="margin: 0; padding-left: 1rem;">
+  <li>Emotional exhaustion & disengagement</li>
+  <li>Excessive self-criticism</li>
+  <li>Increased absenteeism</li>
+</ul>
+
+<h4>How to Open Conversations</h4>
+<ul style="margin: 0; padding-left: 1rem;">
+  <li>“I’ve noticed you seem withdrawn — how are you holding up?”</li>
+  <li>Acknowledge that stress and challenges are a normal part of the profession</li>
+</ul>
+</div>
+
+<!-- RIGHT COLUMN -->
+<div style="flex: 0 0 45%;">
+<h4>Supportive Actions</h4>
+<ul style="margin: 0; padding-left: 1rem;">
+  <li>Model self-care openly (e.g., “I’m blocking time for a walk today.”)</li>
+  <li>Create safe spaces for check-ins</li>
+  <li>Normalize reflection and mental health talk during supervision</li>
+</ul>
+
+<h4>Remember the “SEE” Framework</h4>
+<ul style="margin: 0; padding-left: 1rem; list-style-type: square;">
+  <li><b>Spot</b> signs of stress</li>
+  <li><b>Empathize</b> without judgment</li>
+  <li><b>Encourage</b> help-seeking and self-care</li>
+</ul>
+</div>
+
+</div>
+
+<blockquote style="font-size: 0.8em; margin-top: 1em; font-style: italic; color: #555;">
+STS is a real and common phenomenon mentors and residents may encounter.
+</blockquote>
+
+
+## References
